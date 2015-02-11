@@ -1,5 +1,7 @@
 package goodtime.Launcher.lite.core;
 
+import goodtime.Launcher.lite.config.Info;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -12,6 +14,7 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -30,6 +33,8 @@ public class GTLLite extends JFrame {
 	private JButton buttonLauncher;
 	private JButton buttonOptions;
 	private JButton buttonDownload;
+	
+	public static JComboBox<Object> selectVersion;
 
 	int mx, my, fx, fy;
 	
@@ -132,11 +137,19 @@ public class GTLLite extends JFrame {
 			}
 		});
 		
+		selectVersion = new JComboBox<Object>();
+		selectVersion.setBounds(508, 354, 272, 20);
+		selectVersion.setFont(new Font("Î¢ÈíÑÅºÚ", Font.PLAIN, 12));
+		
+		
 		panel.add(buttonDownload);
 		panel.add(buttonLauncher);
 		panel.add(buttonOptions);
+		panel.add(selectVersion);
 
 		
 		mainPane.setLayout(gl_mainPane);
+		
+		Info.findAllVersion();
 	}
 }
