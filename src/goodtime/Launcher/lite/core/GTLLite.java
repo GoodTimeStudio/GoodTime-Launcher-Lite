@@ -1,5 +1,6 @@
 package goodtime.Launcher.lite.core;
 
+import goodtime.Launcher.lite.config.Config;
 import goodtime.Launcher.lite.config.Info;
 
 import java.awt.Color;
@@ -87,6 +88,13 @@ public class GTLLite extends JFrame {
 		JButton btnNewButton = new JButton("X");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Info.version = selectVersion.getSelectedItem().toString();
+					Config.setConfig("select", Info.version);
+					Config.save();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				System.exit(0);
 			}
 		});
@@ -118,6 +126,13 @@ public class GTLLite extends JFrame {
 		buttonDownload.setUI(new MyButtonUI());
 		
 		buttonLauncher = new JButton();
+		buttonLauncher.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Info.getLaunchInfo();
+				Launch.main(null);
+			}
+		});
 		buttonLauncher.setOpaque(false);
 		buttonLauncher.setBounds(508, 387, 148, 79);
 		buttonLauncher.setText("∆Ù∂Ø”Œœ∑");
@@ -150,6 +165,15 @@ public class GTLLite extends JFrame {
 		
 		mainPane.setLayout(gl_mainPane);
 		
+		
+		//==================================
 		Info.findAllVersion();
+		
+		try {
+			Info.version = Config.getConfig("select");
+			selectVersion.setSelectedItem(Info.version);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

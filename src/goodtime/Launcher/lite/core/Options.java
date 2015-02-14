@@ -129,6 +129,13 @@ public class Options extends JFrame {
 				Info.javaArgs = textJavaArgs.getText();
 				if (checkBoxOnline.isSelected()) {
 					on = "true";
+				} else {
+					on = "false";
+				}
+				try {
+					Info.version = GTLLite.selectVersion.getSelectedItem().toString();
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 				new save();
 				Config.save();
@@ -301,6 +308,7 @@ class save {
 			Config.setConfig("javaPath", Info.javaPath);
 			Config.setConfig("args", Info.javaArgs);
 			Config.setConfig("online", Options.on);
+			Config.setConfig("select", Info.version);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
